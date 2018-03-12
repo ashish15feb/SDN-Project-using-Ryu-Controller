@@ -1,0 +1,71 @@
+mininet@mininet-vm:~$ sudo mn --custom topohw4.py --controller remote --topo mytopo
+*** Creating network
+*** Adding controller
+Unable to contact the remote controller at 127.0.0.1:6653
+Connecting to remote controller at 127.0.0.1:6633
+*** Adding hosts:
+h21 h22 h31 h32 h41 h42 server80 server88
+*** Adding switches:
+s1 s2 s3 s4
+*** Adding links:
+(h21, s2) (h22, s2) (h31, s3) (h32, s3) (h41, s4) (h42, s4) (s1, s2) (s1, s3) (s1, s4) (server80, s1) (server88, s1)
+*** Configuring hosts
+h21 h22 h31 h32 h41 h42 server80 server88
+*** Starting controller
+c0
+*** Starting 4 switches
+s1 s2 s3 s4 ...
+*** Starting CLI:
+
+mininet> pingall
+*** Ping: testing ping reachability
+h21 -> h22 h31 h32 h41 h42 server80 server88
+h22 -> h21 h31 h32 h41 h42 server80 server88
+h31 -> h21 h22 h32 h41 h42 server80 server88
+h32 -> h21 h22 h31 h41 h42 server80 server88
+h41 -> h21 h22 h31 h32 h42 server80 server88
+h42 -> h21 h22 h31 h32 h41 server80 server88
+server80 -> h21 h22 h31 h32 h41 h42 server88
+server88 -> h21 h22 h31 h32 h41 h42 server80
+*** Results: 0% dropped (56/56 received)
+mininet> dump
+<Host h21: h21-eth0:10.10.2.1 pid=3142>
+<Host h22: h22-eth0:10.10.2.2 pid=3144>
+<Host h31: h31-eth0:10.10.3.1 pid=3146>
+<Host h32: h32-eth0:10.10.3.2 pid=3148>
+<Host h41: h41-eth0:10.10.4.1 pid=3150>
+<Host h42: h42-eth0:10.10.4.2 pid=3152>
+<Host server80: server80-eth0:10.10.1.100 pid=3154>
+<Host server88: server88-eth0:10.10.1.200 pid=3156>
+<OVSSwitch s1: lo:127.0.0.1,s1-eth1:None,s1-eth2:None,s1-eth3:None,s1-eth4:None,s1-eth5:None pid=3161>
+<OVSSwitch s2: lo:127.0.0.1,s2-eth1:None,s2-eth2:None,s2-eth3:None pid=3164>
+<OVSSwitch s3: lo:127.0.0.1,s3-eth1:None,s3-eth2:None,s3-eth3:None pid=3167>
+<OVSSwitch s4: lo:127.0.0.1,s4-eth1:None,s4-eth2:None,s4-eth3:None pid=3170>
+<RemoteController c0: 127.0.0.1:6633 pid=3134>
+mininet> net
+h21 h21-eth0:s2-eth1
+h22 h22-eth0:s2-eth2
+h31 h31-eth0:s3-eth1
+h32 h32-eth0:s3-eth2
+h41 h41-eth0:s4-eth1
+h42 h42-eth0:s4-eth2
+server80 server80-eth0:s1-eth1
+server88 server88-eth0:s1-eth2
+s1 lo:  s1-eth1:server80-eth0 s1-eth2:server88-eth0 s1-eth3:s2-eth3 s1-eth4:s3-eth3 s1-eth5:s4-eth3
+s2 lo:  s2-eth1:h21-eth0 s2-eth2:h22-eth0 s2-eth3:s1-eth3
+s3 lo:  s3-eth1:h31-eth0 s3-eth2:h32-eth0 s3-eth3:s1-eth4
+s4 lo:  s4-eth1:h41-eth0 s4-eth2:h42-eth0 s4-eth3:s1-eth5
+c0
+mininet> links
+h21-eth0<->s2-eth1 (OK OK)
+h22-eth0<->s2-eth2 (OK OK)
+h31-eth0<->s3-eth1 (OK OK)
+h32-eth0<->s3-eth2 (OK OK)
+h41-eth0<->s4-eth1 (OK OK)
+h42-eth0<->s4-eth2 (OK OK)
+s1-eth3<->s2-eth3 (OK OK)
+s1-eth4<->s3-eth3 (OK OK)
+s1-eth5<->s4-eth3 (OK OK)
+server80-eth0<->s1-eth1 (OK OK)
+server88-eth0<->s1-eth2 (OK OK)
+mininet>

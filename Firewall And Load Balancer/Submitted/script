@@ -1,0 +1,10 @@
+#!/bin/bash
+x=1
+while [ $x -le 12 ]
+do
+	echo 'date'
+	wget 10.10.1.50
+	echo
+	x=$(($x+1))
+	sleep 2s
+done
